@@ -1,0 +1,14 @@
+query GetContacts($type: String) {
+  contactsCollection(type: $type) {
+    id
+    firstName
+    lastName
+    fullName
+    email
+    type
+    tags
+    status
+    createdAt
+    updatedAt
+  }
+}

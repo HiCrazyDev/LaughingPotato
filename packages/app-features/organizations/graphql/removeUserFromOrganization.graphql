@@ -1,0 +1,6 @@
+mutation RemoveUserFromOrganization(
+  $userId: String!
+  $organizationId: String!
+) {
+  removeUserFromOrganizationCollection(userId: $userId, organizationId: $organizationId)
+}

@@ -1,0 +1,37 @@
+# @ui/theme
+
+## 0.1.3
+
+### Patch Changes
+
+- f7b55ba: Updated dependencies
+
+## 0.1.2
+
+### Patch Changes
+
+- 408143d: Using date-fns ESM module
+
+## 0.1.1
+
+### Patch Changes
+
+- 005eea5: Updated dependencies
+
+## 0.1.0
+
+### Minor Changes
+
+- 28faa7a: Updated to Chakra UI 2.2.1
+- c1d4765: BREAKING: Updated to Chakra UI 2.1
+- c1d4765: BREAKING: React 18 support.
+
+### Patch Changes
+
+- f172105: Updated dependencies
+
+## 0.0.1
+
+### Patch Changes
+
+- 3550e80: New Earth and Galaxy color schemes.

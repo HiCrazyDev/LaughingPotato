@@ -1,0 +1,8 @@
+mutation CreateOrganization($name: String!) {
+  createOrganizationCollection(name: $name) {
+    id
+    name
+    slug
+    plan
+  }
+}

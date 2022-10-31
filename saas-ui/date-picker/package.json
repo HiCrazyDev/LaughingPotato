@@ -1,0 +1,50 @@
+{
+  "name": "@saas-ui/date-picker",
+  "version": "0.4.2",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js"
+    },
+    "./src": {
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.saas-ui.dev"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "bundle": "yarn pack --out ./dist/%s-%v.tgz",
+    "build": "tsup src/index.ts --config tsup.config.ts",
+    "lint": "TIMING=1 eslint src/**/*.ts* --fix",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.0.4",
+    "@chakra-ui/react-utils": "^2.0.1",
+    "@chakra-ui/utils": "^2.0.4",
+    "@datepicker-react/hooks": "^2.8.4",
+    "date-fns": "^2.29.3"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": ">=2",
+    "@chakra-ui/system": ">=2",
+    "@emotion/react": ">=11",
+    "@emotion/styled": ">=11",
+    "@saas-ui/react": ">=1",
+    "framer-motion": ">=5.5.0",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "tsup": "^6.2.3"
+  }
+}

@@ -1,0 +1,13 @@
+query GetContact($id: String) {
+  contactCollection(id: $id) {
+    id
+    firstName
+    lastName
+    fullName
+    email
+    status
+    type
+    createdAt
+    updatedAt
+  }
+}

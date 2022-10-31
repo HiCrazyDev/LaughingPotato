@@ -1,0 +1,8 @@
+mutation UpdateOrganization($id: String!, $name: String!, $email: String) {
+  updateOrganizationCollection(id: $id, name: $name, email: $email) {
+    id
+    name
+    slug
+    email
+  }
+}

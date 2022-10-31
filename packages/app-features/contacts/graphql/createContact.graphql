@@ -1,0 +1,9 @@
+mutation CreateContact($name: String!) {
+  createContactCollection(name: $name) {
+    id
+    firstName
+    lastName
+    fullName
+    email
+  }
+}

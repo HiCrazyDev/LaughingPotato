@@ -1,0 +1,9 @@
+query GetOrganizations {
+  organizationsCollection {
+    id
+    name
+    slug
+    plan
+    logo
+  }
+}

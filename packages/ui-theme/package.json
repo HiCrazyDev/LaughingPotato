@@ -1,0 +1,13 @@
+{
+  "name": "@ui/theme",
+  "version": "0.1.3",
+  "sideEffects": false,
+  "author": "Eelco Wiersma <eelco@appulse.nl>",
+  "homepage": "https://saas-ui.dev/",
+  "dependencies": {
+    "@fontsource/inter": "^4.5.13"
+  },
+  "peerDependencies": {
+    "@chakra-ui/react": ">=2.0.0"
+  }
+}
