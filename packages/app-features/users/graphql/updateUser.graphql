@@ -1,13 +1,24 @@
-mutation UpdateUser($id: String!, $name: String, $email: String) {
-  updateUserCollection(id: $id, name: $name, email: $email) {
-    id
-    name
-    email
-    organizations {
-      id
-      name
-      slug
-      plan
+mutation UpdateUser($id: Int!, $values: UsersUpdateInput!) {
+  updateUsersCollection(
+    filter: {id: { eq : $id} }
+    set: $values){
+      records{
+        id
+        name
+        email
+        avatar
+        organizations {
+          id
+          name
+          slug
+          email
+          logo
+          subscription
+          createdAt
+          updatedAt
+          plan
+          userid
+        }
+      }
     }
-  }
 }

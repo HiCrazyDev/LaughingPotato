@@ -1,13 +1,16 @@
-query GetContact($id: String) {
-  contactCollection(id: $id) {
-    id
-    firstName
-    lastName
-    fullName
-    email
-    status
-    type
-    createdAt
-    updatedAt
+query GetContact($id: Int) {
+  contactsCollection(filter : {id : {eq : $id}}) {
+    edges {
+      node {
+        id
+        firstName
+        lastName
+        fullName
+        email
+        status
+        createdAt
+        updatedAt
+      }
+    }
   }
 }

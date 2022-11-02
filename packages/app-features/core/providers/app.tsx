@@ -1,8 +1,6 @@
 import * as React from 'react'
 
-// import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-import { createClient, Provider } from "urql";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { IconContext } from 'react-icons'
 
@@ -25,26 +23,11 @@ import { theme } from '@ui/theme'
 
 import features from '@app/config/feature-flags'
 
-// const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 /**
  * Use the Yup resolver as default in all forms
  */
-
-const headers = {
-  apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  // authorization: `Bearer ${<SUPABASE_ANON_KEY}`>
-}
-
-// Create GraphQL client
-// See: https://formidable.com/open-source/urql/docs/basics/react-preact/#setting-up-the-client
-const client = createClient({
-  url: process.env.NEXT_PUBLIC_SUPABASE_URL + '/graphql/v1',
-  fetchOptions: function createFetchOptions() {
-    return { headers }
-  },
-})
-
 Form.getResolver = (schema: AnyObjectSchema) => yupResolver(schema)
 Form.getFieldResolver = (schema: AnyObjectSchema) => yupFieldResolver(schema)
 
@@ -68,6 +51,7 @@ export const AppProvider: React.FC<AppProviderProps> = (props) => {
   } = props
 
   return (
+    <QueryClientProvider client={queryClient}>
       <IconContext.Provider value={{ className: 'react-icon', size: '1.1em' }}>
         <SaasProvider
           linkComponent={linkComponent}
@@ -85,5 +69,6 @@ export const AppProvider: React.FC<AppProviderProps> = (props) => {
           </AuthProvider>
         </SaasProvider>
       </IconContext.Provider>
+    </QueryClientProvider>
   )
 }

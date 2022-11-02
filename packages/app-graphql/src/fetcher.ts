@@ -7,19 +7,20 @@ const getAPIUrl = (): string => {
 
   // Infer the deploy URL if we're in production
   // VERCEL_URL = Vercel, DEPLOY_URL = Netlify, ROOT_URL = Custom
-  const ROOT_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const ROOT_URL =
+    process.env.NEXT_PUBLIC_SUPABASE_URL;
+
   if (ROOT_URL) {
     return `https://${ROOT_URL.replace(/^https?:\/\//, '')}${apiPath}`
   }
 
-  if (process.env.NODE_ENV !== `development`)
-    return `http://localhost:3000${apiPath}`
+  // if (process.env.NODE_ENV === `development`)
+    // return `http://localhost:3000${apiPath}`
 
   throw new Error('No ROOT_URL configured.')
 }
 
 export const useFetchData = <TData, TVariables>(
-  // operationName: string,
   query: string,
   options?: RequestInit['headers'],
 ): ((variables?: TVariables) => Promise<TData>) => {
@@ -37,6 +38,7 @@ export const useFetchData = <TData, TVariables>(
     if (apikey) {
       headers['apikey'] = apikey
     }
+
     const res = await fetch(getAPIUrl(), {
       method: 'POST',
       headers,

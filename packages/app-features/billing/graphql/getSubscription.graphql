@@ -1,11 +1,9 @@
 query GetSubscription($slug: String) {
-  subscriptionCollection(slug: $slug) {
-    id
-    plan
-    status
-    startedAt
-    trialEndsAt
-    createdAt
-    updatedAt
+  organizationsCollection(filter: { slug : {eq : $slug}}){
+    edges {
+      node {
+        subscription 
+      }
+    }
   }
 }

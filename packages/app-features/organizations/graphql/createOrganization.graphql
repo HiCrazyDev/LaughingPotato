@@ -1,8 +1,15 @@
-mutation CreateOrganization($name: String!) {
-  createOrganizationCollection(name: $name) {
-    id
-    name
-    slug
-    plan
+mutation CreateOrganization($value: OrganizationsInsertInput!) {
+  insertIntoOrganizationsCollection(objects: [$value]){
+    records {
+      id
+      name
+      slug
+      email
+      logo
+      subscription
+      createdAt
+      updatedAt
+      plan
+    }
   }
 }

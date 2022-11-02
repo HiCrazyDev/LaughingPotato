@@ -75,7 +75,6 @@ export interface ActivityTimelineProps {
 
 export const ActivityTimeline: React.FC<ActivityTimelineProps> = (props) => {
   const { currentUser, activities, onAddComment, onDeleteComment } = props
-
   return (
     <Timeline>
       <AnimatePresence initial={false}>
@@ -178,7 +177,7 @@ const ActivityUser: React.FC<TextProps & { user: Partial<User> }> = (props) => {
 }
 
 const ActivityTimelineAction: React.FC<ActivityAction> = (props) => {
-  const { id, user, data, date } = props
+  const { id, users, data, date } = props
   return (
     <ActivityTimelineItem
       id={`action-${id}`}
@@ -192,7 +191,7 @@ const ActivityTimelineAction: React.FC<ActivityAction> = (props) => {
       }
     >
       <ActivityText>
-        <ActivityUser user={user} /> created the contact.
+        <ActivityUser user={users} /> created the contact.
       </ActivityText>{' '}
       <ActivityLink href={`#action-${id}`} color="muted">
         <ActivityTimelineDate date={date} />
@@ -216,12 +215,12 @@ const UpdateIcon: React.FC<UpdateIconProps> = (props) => {
 }
 
 const ActivityTimelineUpdate: React.FC<ActivityUpdate> = (props) => {
-  const { id, user, data, date } = props
+  const { id, users, data, date } = props
 
   return (
     <ActivityTimelineItem id={`update-${id}`} icon={<UpdateIcon {...data} />}>
       <ActivityText>
-        <ActivityUser user={user} /> changed {data.field} to {data.value}
+        <ActivityUser user={users} /> changed {data.field} to {data.value}
         {data.oldValue && ` from ${data.oldValue}`}.
       </ActivityText>{' '}
       <ActivityLink href={`#update-${id}`} color="muted">
@@ -238,7 +237,7 @@ interface ActivityTimelineCommentProps extends ActivityComment {
 const ActivityTimelineComment: React.FC<ActivityTimelineCommentProps> = (
   props,
 ) => {
-  const { id, user, data, date, onDelete } = props
+  const { id, users, data, date, onDelete } = props
   const modals = useModals()
 
   return (
@@ -247,17 +246,17 @@ const ActivityTimelineComment: React.FC<ActivityTimelineCommentProps> = (
       iconOffset="2px"
       icon={
         <PersonaAvatar
-          src={user.avatar}
-          name={user.name}
+          src={users.avatar}
+          name={users.name}
           size="xs"
-          presence={user.presence}
+          presence={users.presence}
         />
       }
     >
       <Card mb="4">
         <CardBody py="2">
           <HStack mb="4">
-            <ActivityUser user={user} />
+            <ActivityUser user={users} />
             <ActivityLink href={`#action-${id}`} color="muted">
               <ActivityTimelineDate date={date} />
             </ActivityLink>

@@ -31,6 +31,7 @@ import { Breadcrumbs } from '@app/features/core/components/breadcrumbs'
 import { ContactSidebar } from '../components/contact-sidebar'
 import { Activities, ActivityTimeline } from '../components/activity-timeline'
 import { useQueryClient } from '@tanstack/react-query'
+import { number } from 'yup'
 
 interface ContactsViewPageProps {
   id: string
@@ -38,8 +39,11 @@ interface ContactsViewPageProps {
 
 export function ContactsViewPage({ id }: ContactsViewPageProps) {
   const { data, isLoading, error } = useGetContactQuery({
-    id: String(id),
+    id: Number(id),
   })
+
+  const contact = data ?.  contactsCollection ?.edges[0]["node"];
+  console.log(contact);
 
   const sidebar = useDisclosure({
     defaultIsOpen: true,
@@ -49,7 +53,7 @@ export function ContactsViewPage({ id }: ContactsViewPageProps) {
     <Breadcrumbs
       items={[
         { href: usePath('/contacts'), title: 'Contacts' },
-        { title: data?.contact?.fullName },
+        { title: contact?.fullName },
       ]}
     />
   )
@@ -89,25 +93,27 @@ export function ContactsViewPage({ id }: ContactsViewPageProps) {
           >
             <TabPanel>
               <ErrorBoundary>
-                <ActivitiesPanel contactId={id} />
+                <ActivitiesPanel contactId={Number(id)} />
               </ErrorBoundary>
             </TabPanel>
           </TabPanels>
         </Tabs>
 
-        <ContactSidebar contact={data?.contact} isOpen={sidebar.isOpen} />
+        <ContactSidebar contact={contact} isOpen={sidebar.isOpen} />
       </HStack>
     </Page>
   )
 }
 
-const ActivitiesPanel: React.FC<{ contactId: string }> = ({ contactId }) => {
+const ActivitiesPanel: React.FC<{ contactId: number }> = ({ contactId }) => {
   const currentUser = useCurrentUser()
+  console.log('currentUser', currentUser);
 
   const { data, isLoading } = useGetContactActivitiesQuery({
     id: contactId,
   })
 
+  const activities = data ?.  activityCommentCollection ?.edges ?. map((activity : any) => {return activity["node"]});
   const queryClient = useQueryClient()
 
   const addMutation = useAddCommentMutation({
@@ -132,7 +138,7 @@ const ActivitiesPanel: React.FC<{ contactId: string }> = ({ contactId }) => {
             Activity
           </Heading>
           <ActivityTimeline
-            activities={(data?.activities || []) as Activities}
+            activities={(activities || []) as Activities}
             currentUser={currentUser}
             onAddComment={async (data) => {
               return addMutation.mutate({

@@ -1,7 +1,5 @@
 import { useGetOrganizationQuery } from '@app/graphql'
 
-// import { gql } from "@app/graphql/gql"
-
 import { useState } from "react";
 
 import { Grid, GridItem } from '@chakra-ui/react'
@@ -34,7 +32,7 @@ export function OverviewPage() {
     slug: tenant,
   })
 
-  const organization = data ?.organization
+  const organization = data ?.organizationsCollection ?.edges ?.map ((organization: any) => {return organization["node"]});
 
   if (!isLoading && !organization) {
     return (
@@ -74,7 +72,7 @@ export function OverviewPage() {
     <Page title={organization ?.name} toolbar={toolbar} isLoading={isLoading}>
       <PageBody pt="8">
         <Grid
-          templateColumns={['repeat(1, 1fr)', null, 'repeat(1, 1fr)']}
+          templateColumns={['repeat(1, 1fr)', null, 'repeat(1, 1fr)']}g
           width="100%"
           gap="4"
           p="4"

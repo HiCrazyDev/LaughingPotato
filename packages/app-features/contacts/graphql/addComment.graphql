@@ -1,16 +1,26 @@
-mutation AddComment($contactId: String!, $comment: String!) {
-  addActivityCommentCollection(id: $contactId, comment: $comment) {
-    id
-    user {
-      id
-      name
-      avatar
-      status
+mutation AddComment($contactId: Int!, $value: ActivityCommentUpdateInput!) {
+  updateActivityCommentCollection(
+    filter : {contactId : { eq : $contactId}}
+    set : $value) {
+      records {
+        __typename
+        id
+        user
+        type
+        data
+        date
+        createdAt
+        updatedAt
+        contact {
+          id
+          firstName
+          lastName
+          fullName
+          email
+          status
+          createdAt
+          updatedAt
+        }
+      }
     }
-    type
-    data
-    date
-    createdAt
-    updatedAt
-  }
 }

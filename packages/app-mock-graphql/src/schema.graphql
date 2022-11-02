@@ -1,0 +1,917 @@
+type ActivityComment {
+  id: BigInt!
+  type: String
+  data: String
+  date: Date
+  createdAt: Date
+  updatedAt: Date
+  contactId: Int
+  user: Int
+  contact: Contacts
+  users: Users
+}
+
+type ActivityCommentConnection {
+  edges: [ActivityCommentEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ActivityCommentDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [ActivityComment!]!
+}
+
+type ActivityCommentEdge {
+  cursor: String!
+  node: ActivityComment!
+}
+
+input ActivityCommentFilter {
+  id: BigIntFilter
+  type: StringFilter
+  data: StringFilter
+  date: DateFilter
+  createdAt: DateFilter
+  updatedAt: DateFilter
+  contactId: IntFilter
+  user: IntFilter
+}
+
+input ActivityCommentInsertInput {
+  type: String
+  data: String
+  date: Date
+  createdAt: Date
+  updatedAt: Date
+  contactId: Int
+  user: Int
+}
+
+type ActivityCommentInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [ActivityComment!]!
+}
+
+input ActivityCommentOrderBy {
+  id: OrderByDirection
+  type: OrderByDirection
+  data: OrderByDirection
+  date: OrderByDirection
+  createdAt: OrderByDirection
+  updatedAt: OrderByDirection
+  contactId: OrderByDirection
+  user: OrderByDirection
+}
+
+input ActivityCommentUpdateInput {
+  type: String
+  data: String
+  date: Date
+  createdAt: Date
+  updatedAt: Date
+  contactId: Int
+  user: Int
+}
+
+type ActivityCommentUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [ActivityComment!]!
+}
+
+scalar BigInt
+
+"""
+Boolean expression comparing fields on type "BigInt"
+"""
+input BigIntFilter {
+  eq: BigInt
+  gt: BigInt
+  gte: BigInt
+  in: [BigInt!]
+  lt: BigInt
+  lte: BigInt
+  neq: BigInt
+}
+
+"""
+Boolean expression comparing fields on type "Boolean"
+"""
+input BooleanFilter {
+  eq: Boolean
+  gt: Boolean
+  gte: Boolean
+  in: [Boolean!]
+  lt: Boolean
+  lte: Boolean
+  neq: Boolean
+}
+
+type Contacts {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  fullName: String!
+  email: String!
+  status: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  activityCommentCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: ActivityCommentFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [ActivityCommentOrderBy!]
+  ): ActivityCommentConnection
+}
+
+type ContactsConnection {
+  edges: [ContactsEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ContactsDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Contacts!]!
+}
+
+type ContactsEdge {
+  cursor: String!
+  node: Contacts!
+}
+
+input ContactsFilter {
+  id: IntFilter
+  firstName: StringFilter
+  lastName: StringFilter
+  fullName: StringFilter
+  email: StringFilter
+  status: StringFilter
+  createdAt: DatetimeFilter
+  updatedAt: DatetimeFilter
+}
+
+input ContactsInsertInput {
+  firstName: String
+  lastName: String
+  fullName: String
+  email: String
+  status: String
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+type ContactsInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Contacts!]!
+}
+
+input ContactsOrderBy {
+  id: OrderByDirection
+  firstName: OrderByDirection
+  lastName: OrderByDirection
+  fullName: OrderByDirection
+  email: OrderByDirection
+  status: OrderByDirection
+  createdAt: OrderByDirection
+  updatedAt: OrderByDirection
+}
+
+input ContactsUpdateInput {
+  firstName: String
+  lastName: String
+  fullName: String
+  email: String
+  status: String
+  createdAt: Datetime
+  updatedAt: Datetime
+}
+
+type ContactsUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Contacts!]!
+}
+
+scalar Cursor
+
+scalar Date
+
+"""
+Boolean expression comparing fields on type "Date"
+"""
+input DateFilter {
+  eq: Date
+  gt: Date
+  gte: Date
+  in: [Date!]
+  lt: Date
+  lte: Date
+  neq: Date
+}
+
+scalar Datetime
+
+"""
+Boolean expression comparing fields on type "Datetime"
+"""
+input DatetimeFilter {
+  eq: Datetime
+  gt: Datetime
+  gte: Datetime
+  in: [Datetime!]
+  lt: Datetime
+  lte: Datetime
+  neq: Datetime
+}
+
+"""
+Boolean expression comparing fields on type "Float"
+"""
+input FloatFilter {
+  eq: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  neq: Float
+}
+
+"""
+Boolean expression comparing fields on type "Int"
+"""
+input IntFilter {
+  eq: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  neq: Int
+}
+
+scalar JSON
+
+"""
+Boolean expression comparing fields on type "JSON"
+"""
+input JSONFilter {
+  eq: JSON
+  neq: JSON
+}
+
+"""The root type for creating and mutating data"""
+type Mutation {
+  """Deletes zero or more records from the collection"""
+  deleteFromActivityCommentCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: ActivityCommentFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): ActivityCommentDeleteResponse!
+
+  """Deletes zero or more records from the collection"""
+  deleteFromContactsCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: ContactsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): ContactsDeleteResponse!
+
+  """Deletes zero or more records from the collection"""
+  deleteFromOrganizationsCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: OrganizationsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): OrganizationsDeleteResponse!
+
+  """Deletes zero or more records from the collection"""
+  deleteFromSubscriptionCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: SubscriptionFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): SubscriptionDeleteResponse!
+
+  """Deletes zero or more records from the collection"""
+  deleteFromUsersCollection(
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: UsersFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): UsersDeleteResponse!
+
+  """
+  Adds one or more `ActivityCommentInsertResponse` records to the collection
+  """
+  insertIntoActivityCommentCollection(objects: [ActivityCommentInsertInput!]!): ActivityCommentInsertResponse
+
+  """Adds one or more `ContactsInsertResponse` records to the collection"""
+  insertIntoContactsCollection(objects: [ContactsInsertInput!]!): ContactsInsertResponse
+
+  """
+  Adds one or more `OrganizationsInsertResponse` records to the collection
+  """
+  insertIntoOrganizationsCollection(objects: [OrganizationsInsertInput!]!): OrganizationsInsertResponse
+
+  """
+  Adds one or more `SubscriptionInsertResponse` records to the collection
+  """
+  insertIntoSubscriptionCollection(objects: [SubscriptionInsertInput!]!): SubscriptionInsertResponse
+
+  """Adds one or more `UsersInsertResponse` records to the collection"""
+  insertIntoUsersCollection(objects: [UsersInsertInput!]!): UsersInsertResponse
+
+  """Updates zero or more records in the collection"""
+  updateActivityCommentCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: ActivityCommentUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: ActivityCommentFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): ActivityCommentUpdateResponse!
+
+  """Updates zero or more records in the collection"""
+  updateContactsCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: ContactsUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: ContactsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): ContactsUpdateResponse!
+
+  """Updates zero or more records in the collection"""
+  updateOrganizationsCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: OrganizationsUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: OrganizationsFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): OrganizationsUpdateResponse!
+
+  """Updates zero or more records in the collection"""
+  updateSubscriptionCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: SubscriptionUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: SubscriptionFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): SubscriptionUpdateResponse!
+
+  """Updates zero or more records in the collection"""
+  updateUsersCollection(
+    """
+    Fields that are set will be updated for all records matching the `filter`
+    """
+    set: UsersUpdateInput!
+
+    """Restricts the mutation's impact to records matching the critera"""
+    filter: UsersFilter
+
+    """
+    The maximum number of records in the collection permitted to be affected
+    """
+    atMost: Int! = 1
+  ): UsersUpdateResponse!
+}
+
+"""Defines a per-field sorting order"""
+enum OrderByDirection {
+  """Ascending order, nulls first"""
+  AscNullsFirst
+
+  """Ascending order, nulls last"""
+  AscNullsLast
+
+  """Descending order, nulls first"""
+  DescNullsFirst
+
+  """Descending order, nulls last"""
+  DescNullsLast
+}
+
+type Organizations {
+  id: Int!
+  name: String!
+  slug: String!
+  email: String!
+  logo: String!
+  subscription: JSON!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  plan: String
+  userid: Int
+  users: Users
+  usersCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: UsersFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [UsersOrderBy!]
+  ): UsersConnection
+}
+
+type OrganizationsConnection {
+  edges: [OrganizationsEdge!]!
+  pageInfo: PageInfo!
+}
+
+type OrganizationsDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Organizations!]!
+}
+
+type OrganizationsEdge {
+  cursor: String!
+  node: Organizations!
+}
+
+input OrganizationsFilter {
+  id: IntFilter
+  name: StringFilter
+  slug: StringFilter
+  email: StringFilter
+  logo: StringFilter
+  createdAt: DatetimeFilter
+  updatedAt: DatetimeFilter
+  plan: StringFilter
+  userid: IntFilter
+}
+
+input OrganizationsInsertInput {
+  name: String
+  slug: String
+  email: String
+  logo: String
+  subscription: JSON
+  createdAt: Datetime
+  updatedAt: Datetime
+  plan: String
+  userid: Int
+}
+
+type OrganizationsInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Organizations!]!
+}
+
+input OrganizationsOrderBy {
+  id: OrderByDirection
+  name: OrderByDirection
+  slug: OrderByDirection
+  email: OrderByDirection
+  logo: OrderByDirection
+  createdAt: OrderByDirection
+  updatedAt: OrderByDirection
+  plan: OrderByDirection
+  userid: OrderByDirection
+}
+
+input OrganizationsUpdateInput {
+  name: String
+  slug: String
+  email: String
+  logo: String
+  subscription: JSON
+  createdAt: Datetime
+  updatedAt: Datetime
+  plan: String
+  userid: Int
+}
+
+type OrganizationsUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Organizations!]!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+"""The root type for querying data"""
+type Query {
+  """A pagable collection of type `ActivityComment`"""
+  activityCommentCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: ActivityCommentFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [ActivityCommentOrderBy!]
+  ): ActivityCommentConnection
+
+  """A pagable collection of type `Contacts`"""
+  contactsCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: ContactsFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [ContactsOrderBy!]
+  ): ContactsConnection
+
+  """A pagable collection of type `Organizations`"""
+  organizationsCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: OrganizationsFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [OrganizationsOrderBy!]
+  ): OrganizationsConnection
+
+  """A pagable collection of type `Subscription`"""
+  subscriptionCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: SubscriptionFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [SubscriptionOrderBy!]
+  ): SubscriptionConnection
+
+  """A pagable collection of type `Users`"""
+  usersCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: UsersFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [UsersOrderBy!]
+  ): UsersConnection
+}
+
+"""
+Boolean expression comparing fields on type "String"
+"""
+input StringFilter {
+  eq: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  neq: String
+}
+
+type Subscription {
+  id: BigInt!
+  plan: String
+  status: String
+  startedAt: Date
+  trialEndsAt: Date
+}
+
+type SubscriptionConnection {
+  edges: [SubscriptionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SubscriptionDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Subscription!]!
+}
+
+type SubscriptionEdge {
+  cursor: String!
+  node: Subscription!
+}
+
+input SubscriptionFilter {
+  id: BigIntFilter
+  plan: StringFilter
+  status: StringFilter
+  startedAt: DateFilter
+  trialEndsAt: DateFilter
+}
+
+input SubscriptionInsertInput {
+  plan: String
+  status: String
+  startedAt: Date
+  trialEndsAt: Date
+}
+
+type SubscriptionInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Subscription!]!
+}
+
+input SubscriptionOrderBy {
+  id: OrderByDirection
+  plan: OrderByDirection
+  status: OrderByDirection
+  startedAt: OrderByDirection
+  trialEndsAt: OrderByDirection
+}
+
+input SubscriptionUpdateInput {
+  plan: String
+  status: String
+  startedAt: Date
+  trialEndsAt: Date
+}
+
+type SubscriptionUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Subscription!]!
+}
+
+scalar Time
+
+"""
+Boolean expression comparing fields on type "Time"
+"""
+input TimeFilter {
+  eq: Time
+  gt: Time
+  gte: Time
+  in: [Time!]
+  lt: Time
+  lte: Time
+  neq: Time
+}
+
+scalar UUID
+
+"""
+Boolean expression comparing fields on type "UUID"
+"""
+input UUIDFilter {
+  eq: UUID
+  in: [UUID!]
+  neq: UUID
+}
+
+type Users {
+  id: Int!
+  name: String
+  email: String
+  avatar: String
+  organizations: Organizations
+  activityCommentCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: ActivityCommentFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [ActivityCommentOrderBy!]
+  ): ActivityCommentConnection
+  organizationsCollection(
+    """Query the first `n` records in the collection"""
+    first: Int
+
+    """Query the last `n` records in the collection"""
+    last: Int
+
+    """Query values in the collection before the provided cursor"""
+    before: Cursor
+
+    """Query values in the collection after the provided cursor"""
+    after: Cursor
+
+    """Filters to apply to the results set when querying from the collection"""
+    filter: OrganizationsFilter
+
+    """Sort order to apply to the collection"""
+    orderBy: [OrganizationsOrderBy!]
+  ): OrganizationsConnection
+}
+
+type UsersConnection {
+  edges: [UsersEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UsersDeleteResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}
+
+type UsersEdge {
+  cursor: String!
+  node: Users!
+}
+
+input UsersFilter {
+  id: IntFilter
+  name: StringFilter
+  email: StringFilter
+  avatar: StringFilter
+  organizations: IntFilter
+}
+
+input UsersInsertInput {
+  id: Int
+  name: String
+  email: String
+  avatar: String
+  organizations: Int
+}
+
+type UsersInsertResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}
+
+input UsersOrderBy {
+  id: OrderByDirection
+  name: OrderByDirection
+  email: OrderByDirection
+  avatar: OrderByDirection
+  organizations: OrderByDirection
+}
+
+input UsersUpdateInput {
+  id: Int
+  name: String
+  email: String
+  avatar: String
+  organizations: Int
+}
+
+type UsersUpdateResponse {
+  """Count of the records impacted by the mutation"""
+  affectedCount: Int!
+
+  """Array of records impacted by the mutation"""
+  records: [Users!]!
+}

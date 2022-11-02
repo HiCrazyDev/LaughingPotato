@@ -17,7 +17,6 @@
     "@tiptap/suggestion": "2.0.0-beta.199",
     "react-icons": "^4.4.0",
     "slug": "^8.2.2",
-    "urql": "2.2.3",
     "yup": "^0.32.11"
   },
   "peerDependencies": {

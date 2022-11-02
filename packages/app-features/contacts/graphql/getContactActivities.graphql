@@ -1,16 +1,28 @@
-query GetContactActivities($id: String) {
-  activitiesCollection(contactId: $id) {
-    id
-    user {
-      id
-      name
-      avatar
-      status
+query GetContactActivities($id: Int) {
+  activityCommentCollection(filter : { contactId : { eq : $ id}}) {
+    edges {
+      node {
+        id
+        user
+        type
+        data
+        date
+        createdAt
+        updatedAt
+        users {
+          id
+          name
+          email
+          avatar
+          organizations {
+            id
+            name
+            slug
+            plan
+            logo
+          }
+        }
+      }
     }
-    type
-    data
-    date
-    createdAt
-    updatedAt
   }
 }

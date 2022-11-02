@@ -1,6 +1,18 @@
 mutation RemoveUserFromOrganization(
   $userId: String!
-  $organizationId: String!
+  $organizationId: Int!
 ) {
-  removeUserFromOrganizationCollection(userId: $userId, organizationId: $organizationId)
+  deleteFromOrganizationsCollection(filter : {email: {eq : $userId}, id: {eq : $organizationId}}){
+    records{
+      id
+      name
+      slug
+      email
+      logo
+      subscription
+      createdAt
+      updatedAt
+      plan
+    }
+  }
 }

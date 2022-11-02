@@ -1,10 +1,9 @@
 import * as React from 'react'
 
-import { useMutation, useQuery } from "urql";
-import { gql } from "@app/graphql/src/gql";
 import {
   useGetContactsQuery,
   Contact,
+  ContactsInsertInput,
   useCreateContactMutation,
 } from '@app/graphql'
 
@@ -54,6 +53,8 @@ import { Button } from '@app/features/core/components/button'
 
 import { ContactTypes } from '../components/contact-types'
 import { filters, AddFilterButton } from '../components/contact-filters'
+import { DateTime } from '@app/i18n'
+import { string } from 'yup/lib/locale'
 
 const contactTypes: Record<string, { label: string; color: string }> = {
   lead: {
@@ -121,8 +122,6 @@ const schema = Yup.object().shape({
     .label('Name'),
 })
 
-const GetContactsQuery = gql(/* GraphQL */ "query GetContacts($type: String) {\n  contactsCollection(type: $type) {\n    id\n    firstName\n    lastName\n    fullName\n    email\n    type\n    tags\n    status\n    createdAt\n    updatedAt\n  }\n}");
-
 export function ContactsListPage() {
   const tenant = useTenant()
   const modals = useModals()
@@ -132,17 +131,11 @@ export function ContactsListPage() {
 
   const isMobile = useBreakpointValue({ base: true, lg: false })
 
-  console.log('GetContactsQuery', GetContactsQuery);
-  const [getContactsQuery] = useQuery({
-    query: GetContactsQuery,
-    variables : {
-      type: params?.type as string,
-    },
+  const { data, isLoading } = useGetContactsQuery({
+    type: params?.type as string,
   })
-  const data = getContactsQuery.data;
-  const isLoading = getContactsQuery.fetching;
 
-
+  const contacts = data ?. contactsCollection ?.edges ?.map((contact :any) => {return contact["node"]});
   const mutation = useCreateContactMutation()
 
   const columns = useColumns<Contact>(
@@ -213,9 +206,8 @@ export function ContactsListPage() {
       schema,
       submitLabel: 'Save',
       onSubmit: (contact) =>
-        mutation.mutateAsync({
-          name: contact.name,
-        }),
+        mutation.mutate({
+        },)
     })
   }
 
@@ -347,7 +339,7 @@ export function ContactsListPage() {
       emptyState={emptyState}
       columns={columns}
       visibleColumns={visibleColumns}
-      data={data?.contacts as Contact[]}
+      data={contacts as Contact[]}
       isLoading={isLoading}
     />
   )

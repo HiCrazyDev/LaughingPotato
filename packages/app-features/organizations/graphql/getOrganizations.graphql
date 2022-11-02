@@ -1,9 +1,13 @@
 query GetOrganizations {
   organizationsCollection {
-    id
-    name
-    slug
-    plan
-    logo
+    edges {
+      node {
+        id
+        name
+        slug
+        plan
+        logo
+      }
+    }
   }
 }

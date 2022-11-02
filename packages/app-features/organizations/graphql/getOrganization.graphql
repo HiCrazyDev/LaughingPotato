@@ -1,18 +1,13 @@
-query GetOrganization($id: String, $slug: String) {
-  organizationCollection(id: $id, slug: $slug) {
-    id
-    name
-    slug
-    plan
-    email
-    logo
-    members {
-      roles
-      user {
+query GetOrganization  {
+  organizationsCollection {
+    edges {
+      node {
         id
         name
+        slug
+        plan
         email
-        status
+        logo
       }
     }
   }

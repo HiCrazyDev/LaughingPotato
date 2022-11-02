@@ -1,6 +1,5 @@
 {
   "search.exclude": {
     "**/.next": true
-  },
-  "git.ignoreLimitWarning": true
+  }
 }

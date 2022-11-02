@@ -1,13 +1,21 @@
 mutation UpdateMemberRoles(
-  $userId: String!
-  $organizationId: String!
-  $roles: [String]!
+  $userId: Int!
+  $organizationId: Int!
+  $values: OrganizationsUpdateInput!
 ) {
-  updateMemberRolesCollection(
-    userId: $userId
-    organizationId: $organizationId
-    roles: $roles
-  ) {
-    roles
-  }
+  updateOrganizationsCollection(
+    filter:{ userid: { eq : $userId}, id: {eq : $organizationId}  },
+    set: $values){
+      records{
+        id
+        name
+        slug
+        email
+        logo
+        subscription
+        createdAt
+        updatedAt
+        plan
+      }
+    }
 }
